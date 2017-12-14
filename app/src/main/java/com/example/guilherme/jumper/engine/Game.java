@@ -1,38 +1,53 @@
 package com.example.guilherme.jumper.engine;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
+import com.example.guilherme.jumper.R;
 import com.example.guilherme.jumper.elements.passaro;
+import com.example.guilherme.jumper.graphic.Tela;
 
 /**
  * Created by guilherme on 12/12/17.
  */
 
-public class Game extends SurfaceView implements Runnable {
+public class Game extends SurfaceView implements Runnable, View.OnTouchListener {
 
     private boolean isRunning = true;
     private SurfaceHolder holder = getHolder();
     private passaro passaro_0;
+    private Bitmap background;
+    private Tela tela;
 
     public Game(Context context) {
         super(context);
 
+        tela = new Tela(context);
+
         inicializaElementos();
+        setOnTouchListener(this);
     }
 
     private void inicializaElementos() {
         passaro_0 = new passaro();
+        Bitmap back = BitmapFactory.decodeResource(getResources(), R.drawable.background);
+        background = Bitmap.createScaledBitmap(back, back.getWidth(), tela.getAtura(), false);
     }
 
     @Override
     public void run() {
-        while(isRunning){  // desenho dos camponentes do jogo
+        while(isRunning){
             if (!holder.getSurface().isValid()) continue;
             Canvas canvas = holder.lockCanvas();
 
+            // desenho dos camponentes do jogo
+            canvas.drawBitmap(background, 0,0, null);
             passaro_0.desenhaNo(canvas);
             passaro_0.cai();
 
@@ -46,5 +61,11 @@ public class Game extends SurfaceView implements Runnable {
 
     public void pausa() {
         isRunning = false;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        passaro_0.pula();
+        return false;
     }
 }

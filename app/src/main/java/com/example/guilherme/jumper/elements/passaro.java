@@ -27,4 +27,8 @@ public class passaro {
     public void cai() {
         this.altura += 5;
     }
+
+    public void pula() {
+        this.altura -= 150;
+    }
 }
