@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.example.guilherme.jumper.graphic.Cores;
+import com.example.guilherme.jumper.graphic.Tela;
 
 /**
  * Created by guilherme on 12/12/17.
@@ -15,8 +16,10 @@ public class passaro {
     private static final float RAIO = 50;
     private static final Paint VERMELHO = Cores.getCorDoPassado();
     private int altura;
+    private Tela tela;
 
-    public passaro(){
+    public passaro(Tela tela){
+        this.tela = tela;
         this.altura = 100;
     }
 
@@ -25,10 +28,16 @@ public class passaro {
     }
 
     public void cai() {
-        this.altura += 5;
+        boolean chegouNoChao = altura + RAIO > tela.getAltura();
+
+        if (!chegouNoChao){
+            this.altura += 5;
+        }
     }
 
     public void pula() {
-        this.altura -= 150;
+        if (altura - RAIO > 0){
+            this.altura -= 150;
+        }
     }
 }
