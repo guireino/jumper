@@ -18,15 +18,22 @@ public class Cano {
     private static final int Largura_Cano = 100;
     private static final Paint verde = Cores.getCorCano();
     private int posicao;
+    private int alturaCanoSuperior;
 
     public Cano(Tela tela, int posicao){
         this.tela = tela;
         this.posicao = posicao;
 
-        alturaCanoInferior = tela.getAltura() - Tamanho_Cano;
+        alturaCanoInferior = tela.getAltura() - Tamanho_Cano - valorAleatorio();
+        alturaCanoSuperior = 0 + Tamanho_Cano + valorAleatorio();
+    }
+
+    private int valorAleatorio() {
+        return (int) (Math.random() * 150);
     }
 
     public void desenhaNo(Canvas canvas) {
+        desenhaCanoSuperior(canvas);
         desenhaCanoInferior(canvas);
     }
 
@@ -34,7 +41,20 @@ public class Cano {
         canvas.drawRect(posicao, alturaCanoInferior, posicao + Largura_Cano, tela.getAltura(), verde);
     }
 
+    public void desenhaCanoSuperior(Canvas canvas) {
+        canvas.drawRect(posicao, 0, posicao + Largura_Cano, alturaCanoSuperior, verde);
+    }
+
     public void move() {
         this.posicao -= 5;
     }
+
+    public boolean saiuTela() {
+        return posicao + Largura_Cano < 0;
+    }
+
+    public int getPoxicao() {
+        return posicao;
+    }
+
 }
