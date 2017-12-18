@@ -12,6 +12,7 @@ import android.view.View;
 import com.example.guilherme.jumper.R;
 import com.example.guilherme.jumper.elements.Cano;
 import com.example.guilherme.jumper.elements.Canos;
+import com.example.guilherme.jumper.elements.GameOver;
 import com.example.guilherme.jumper.elements.Pontuacao;
 import com.example.guilherme.jumper.elements.passaro;
 import com.example.guilherme.jumper.graphic.Tela;
@@ -62,6 +63,11 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
             canos.move();
 
             pontuacao.desenhaNo(canvas);
+
+            if (new VerificadorColisao(passaro_0, canos).temColicao()){
+                new GameOver(tela).desenhoNo(canvas);
+                isRunning = false;
+            }
 
             holder.unlockCanvasAndPost(canvas);
         }

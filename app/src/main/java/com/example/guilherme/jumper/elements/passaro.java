@@ -12,10 +12,10 @@ import com.example.guilherme.jumper.graphic.Tela;
 
 public class passaro {
 
-    private static final float X = 100;
-    private static final float RAIO = 50;
+    public static final float X = 100;
+    public static final float RAIO = 50;
     private static final Paint VERMELHO = Cores.getCorDoPassado();
-    private int altura;
+    private float altura;
     private Tela tela;
 
     public passaro(Tela tela){
@@ -39,5 +39,9 @@ public class passaro {
         if (altura - RAIO > 0){
             this.altura -= 150;
         }
+    }
+
+    public float getAltura() {
+        return this.altura;
     }
 }

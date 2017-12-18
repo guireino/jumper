@@ -29,4 +29,13 @@ public class Cores {
         paint.setShadowLayer(3, 5, 5, 0xFF000000);
         return paint;
     }
+
+    public static Paint getCorGameOver(){
+        Paint painRed = new Paint();
+        painRed.setColor(0xFFFF0000);
+        painRed.setTextSize(50);
+        painRed.setTypeface(Typeface.DEFAULT_BOLD);
+        painRed.setShadowLayer(2,3,3,0xFF000000);
+        return painRed;
+    }
 }

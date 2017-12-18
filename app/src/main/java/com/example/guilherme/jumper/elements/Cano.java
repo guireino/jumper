@@ -13,7 +13,7 @@ import com.example.guilherme.jumper.graphic.Tela;
 public class Cano {
 
     private Tela tela;
-    private final int alturaCanoInferior;
+    private int alturaCanoInferior;
     private static final int Tamanho_Cano = 250;
     private static final int Largura_Cano = 100;
     private static final Paint verde = Cores.getCorCano();
@@ -57,4 +57,12 @@ public class Cano {
         return posicao;
     }
 
+    public boolean temColisaoHorizontal(passaro passaro_0) {
+        return this.posicao < passaro.X + passaro.RAIO;
+    }
+
+    public boolean temColisaoVertical(passaro passaro_0) {
+        return passaro_0.getAltura() - passaro_0.RAIO < this.alturaCanoSuperior
+                || passaro_0.getAltura() + passaro_0.RAIO > this.alturaCanoInferior;
+    }
 }

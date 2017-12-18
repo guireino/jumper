@@ -14,9 +14,9 @@ import java.util.ListIterator;
 
 public class Canos {
 
+    private static final int quantidade_Canos = 5;
     private static final int distancia_Canos = 200;
     private final List<Cano> canos = new ArrayList<Cano>();
-    public static final int quantidade_Canos = 5;
     private Tela tela;
     private Pontuacao pontuacao;
 
@@ -60,5 +60,14 @@ public class Canos {
         }
 
         return maximo;
+    }
+
+    public boolean temColisaoCom(passaro passaro_0) {
+        for (Cano cano: canos){
+            if (cano.temColisaoHorizontal(passaro_0) && cano.temColisaoVertical(passaro_0)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
