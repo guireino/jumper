@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.example.guilherme.jumper.R;
+import com.example.guilherme.jumper.engine.Som;
 import com.example.guilherme.jumper.graphic.Cores;
 import com.example.guilherme.jumper.graphic.Tela;
 
@@ -22,9 +23,11 @@ public class passaro {
     private Bitmap passaro;
     private float altura;
     private Tela tela;
+    private Som som;
 
-    public passaro(Tela tela, Context context){
+    public passaro(Tela tela, Context context, Som som){
         this.tela = tela;
+        this.som = som;
         this.altura = 100;
         Bitmap bp = BitmapFactory.decodeResource(context.getResources(), R.drawable.passaro);
         this.passaro = Bitmap.createScaledBitmap(bp, RAIO*2, RAIO*2, false);
@@ -45,6 +48,7 @@ public class passaro {
 
     public void pula() {
         if (altura - RAIO > 0){
+            som.toca(Som.pulo);
             this.altura -= 150;
         }
     }
