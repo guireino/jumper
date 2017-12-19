@@ -1,5 +1,6 @@
 package com.example.guilherme.jumper.elements;
 
+import android.content.Context;
 import android.graphics.Canvas;
 
 import com.example.guilherme.jumper.graphic.Tela;
@@ -19,16 +20,18 @@ public class Canos {
     private final List<Cano> canos = new ArrayList<Cano>();
     private Tela tela;
     private Pontuacao pontuacao;
+    private Context context;
 
-    public Canos(Tela tela, Pontuacao pontuacao){
+    public Canos(Tela tela, Pontuacao pontuacao, Context context){
         this.tela = tela;
         this.pontuacao = pontuacao;
+        this.context = context;
 
         int posicao = 400;
         
         for (int i = 0; i < quantidade_Canos; i++){
             posicao += distancia_Canos;
-            Cano cano = new Cano(tela, posicao);
+            Cano cano = new Cano(tela, posicao, context);
             canos.add(cano);
         }
     }
@@ -47,7 +50,7 @@ public class Canos {
             if (cano.saiuTela()){  // if que verificar se cano saiu da tela e criar um novo cano
                pontuacao.aumento();
                iterator.remove();
-               Cano outCano = new Cano(tela, getMaximo() + distancia_Canos);
+               Cano outCano = new Cano(tela, getMaximo() + distancia_Canos, context);
                iterator.add(outCano);
             }
         }

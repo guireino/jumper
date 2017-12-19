@@ -28,6 +28,7 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
     private passaro passaro_0;
     private Bitmap background;
     private Tela tela;
+    private Context context;
     private Canos canos;
     private Pontuacao pontuacao;
 
@@ -35,15 +36,16 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
         super(context);
 
         tela = new Tela(context);
+        this.context = context;
 
         inicializaElementos();
         setOnTouchListener(this);
     }
 
     private void inicializaElementos() {
-        passaro_0 = new passaro(tela);
+        passaro_0 = new passaro(tela, context);
         pontuacao = new Pontuacao();
-        canos = new Canos(tela, pontuacao);
+        canos = new Canos(tela, pontuacao, context);
         Bitmap back = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         background = Bitmap.createScaledBitmap(back, back.getWidth(), tela.getAltura(), false);
     }
